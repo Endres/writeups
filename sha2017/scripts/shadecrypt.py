@@ -66,6 +66,6 @@ plaintext = ""
 
 for i in range(len(code)):
 	c = code[i] ^ s[i % len(s)]
-	s[i % len(s)] = s[i % len(s)] ^ c
+	s[i % len(s)] = code[i] # this actually equals s[i % 4] = s[i % 4] ^ c
 	plaintext = plaintext + chr(c)
 print(plaintext)
