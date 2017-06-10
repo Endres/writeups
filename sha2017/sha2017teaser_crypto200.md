@@ -67,7 +67,7 @@ Now we recovered the full cryptographic algorithm behind the given encryption en
 	3. S[I mod 4] := T
 3. return C[0..N]
 
-As the main logical function used in here is a single XOR, this function is directly inversible. Thus, the decryption function in this case equals exactly the encryption function, just that for decryption a ciphertext is supplied as input and the original plaintext is returned back.
+As the main logical function used in here is a single XOR, this function is easily inversible. Thus, the decryption function in this case equals almost exactly the encryption function, just that for decryption a ciphertext is supplied as input, the decrypted plaintext is XORed with the state afterwards, and the plaintext is returned back.
 
 # Bringing it all together
 
