@@ -14,7 +14,7 @@ A first look at the encrypted flag shows, that the ciphertext could be somehow e
 
 We know, that the flags always have this simple format: `flag{xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx}`, where x stands for any hexadecimal character. So we first attempt to encrypt something of this format, like:
 * `flag{0000`: [![](assets/flag_0000.png)](https://cryptoengine.stillhackinganyway.nl/encrypt?text=flag%7B0000)
-* `flag{00000000000000000000000000000000}`: [![](assets/flag_manyzeros.png)](https://cryptoengine.stillhackinganyway.nl/encrypt?text=flag%7B00000000000000000000000000000000%7D)
+* `flag{00000000000000000000000000000000}`: [![](assets/flag_manyzeros_.png)](https://cryptoengine.stillhackinganyway.nl/encrypt?text=flag%7B00000000000000000000000000000000%7D)
 * and also play a bit around like `00000000`: [![](assets/00000000.png)](https://cryptoengine.stillhackinganyway.nl/encrypt?text=00000000)
 
 What already is apparent, is that the first block always seems to be about the same tone of grey, when something starting with `flag` is supplied. Furthermore, supplying different-lengthed plaintext results also in different lengths of output images, which kind of makes sense as all information needs to be stored in the ciphertext.
@@ -62,9 +62,9 @@ Now we recovered the full cryptographic algorithm behind the given encryption en
 
 1. S := [`32 30 31 37`]
 2. for I in 0..N:
-2.1. T := S[I mod 4] XOR P[I]
-2.2. C[I] := T
-2.3. S[I mod 4] := T
+	1. T := S[I mod 4] XOR P[I]
+	2. C[I] := T
+	3. S[I mod 4] := T
 3. return C[0..N]
 
 As the main logical function used in here is a single XOR, this function is directly inversible. Thus, the decryption function in this case equals exactly the encryption function, just that for decryption a ciphertext is supplied as input and the original plaintext is returned back.
@@ -73,5 +73,5 @@ As the main logical function used in here is a single XOR, this function is dire
 
 I wrote an exemplaric python script takes an "encrypted" image file (either local file or http(s) URL), asks for any text that can be seen on the displayed picture in a captcha-fashioned way, decrypts the decoded data, and finally returns the decrypted value as ASCII string. Using this crafted script, it is very easy to find out the actual flag value, which is finally `flag{deaf983eb34e485ce9d2aff0ae44f852}`.
 
-One can find the source code of the python script [inside this GitHub-Repository](scripts/shadecrypt.py)
+One can find the source code of the python script [inside this GitHub-Repository](scripts/shadecrypt.py).
 
